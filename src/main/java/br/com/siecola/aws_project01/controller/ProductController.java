@@ -45,9 +45,9 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> saveProduct(
             @RequestBody @Valid Product product) {
-        @Valid Product productCreated = productRepository.save(product);
+        Product productCreated = productRepository.save(product);
 
-        productPublisher.publishProductEvent(product,
+        productPublisher.publishProductEvent(productCreated,
                 EventType.PRODUCT_CREATED, "matilde");
 
         return new ResponseEntity<Product>(productCreated,
